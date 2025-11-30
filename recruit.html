@@ -1,0 +1,119 @@
+<!-- recruit.html -->
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>団員募集</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <body style="visibility: hidden;"></body>
+    <div id="header-placeholder"></div>
+    <main>
+      <section class="recruit">
+        <h3>団員募集</h3>
+        <p>立川市吹奏楽団では、指揮者以外の全パートで団員を募集しています。打楽器パートは鍵盤打楽器ができる方を歓迎します。</br>
+          私たちと一緒に演奏してみませんか？</br>
+          ※管楽器については個人所有にて見学をお願い致します
+        </p>
+
+        <h3>参加資格</h3>
+        <ul>
+          <li>中学卒業以上</li>
+          <li>吹奏楽またはオーケストラでの合奏経験が1年以上ある方</li>
+          <li>訪問演奏・運搬・設営・移動など、団員としての活動に積極的に参加できる方</li>
+          <li>立川市在住でなくても参加可能です</li>
+        </ul>
+
+        <h3>活動内容</h3>
+        <p>毎週日曜日13時〜17時の合奏練習が基本です。演奏会前後には時間が延長される場合もあります。</p>
+        <p>主な演奏会は、7月の定期演奏会、11月のファミリーコンサート、その他依頼演奏などです。</p>
+
+        <h3>団費・演奏会費</h3>
+        <ul>
+          <li>団費：月額 3,000円（高校生は 1,000円）</li>
+          <li>演奏会費：定期演奏会 2,000円、ファミリーコンサート 3,000円（別途徴収の場合あり）</li>
+        </ul>
+
+        <h3>練習場所</h3>
+        <p><a href="https://tamagawamiraipark.blogspot.com/" class="underline-link" target="_blank" rel="noopener noreferrer">たまがわみらいパーク</a>など</p>
+
+        <h3></br></h3>
+        <p>お気軽に見学にいらしてください！（演奏会1か月前まで可能）</br>
+        <a href="contact.html" class="underline-link">お問い合わせフォームはこちら</a></p>
+
+        <h3></br></h3>
+        <h3>在籍人数（休団員除く）</h3>
+        <p>※2025年10月現在</p>
+
+      </section>
+
+      <section class="member-table">
+        <table>
+          <thead>
+            <tr>
+              <th>楽器名</th>
+              <th>人数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>フルート</td><td>6</td></tr>
+            <tr><td>オーボエ＆イングリッシュホルン</td><td>2</td></tr>
+            <tr><td>ファゴット</td><td>1</td></tr>
+            <tr><td>クラリネット</td><td>12</td></tr>
+            <tr><td>バス・クラリネット</td><td>1</td></tr>
+            <tr><td>コントラバス・クラリネット</td><td>1</td></tr>
+            <tr><td>アルト・サックス</td><td>5</td></tr>
+            <tr><td>テナー・サックス</td><td>1</td></tr>
+            <tr><td>バリトン・サックス</td><td>0</td></tr>
+            <tr><td>トランペット</td><td>7</td></tr>
+            <tr><td>ホルン</td><td>4</td></tr>
+            <tr><td>テナー・トロンボーン</td><td>4</td></tr>
+            <tr><td>バス・トロンボーン</td><td>1</td></tr>
+            <tr><td>ユーフォニアム</td><td>4</td></tr>
+            <tr><td>チューバ</td><td>2</td></tr>
+            <tr><td>コントラバス</td><td>0</td></tr>
+            <tr><td>パーカッション</td><td>6</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+    </main>
+    
+    <div id="footer-placeholder"></div>
+
+    <script>
+      Promise.all([
+        fetch("header.html").then(res => res.text()),
+        fetch("footer.html").then(res => res.text())
+      ]).then(([header, footer]) => {
+        document.getElementById("header-placeholder").innerHTML = header;
+        document.getElementById("footer-placeholder").innerHTML = footer;
+        // ヘッダーが挿入された後にイベントを登録
+        const toggleButton = document.querySelector(".menu-toggle");
+        const navSns = document.querySelector(".nav-sns");
+
+        toggleButton.addEventListener("click", () => {
+          navSns.classList.toggle("open");
+
+          // 開閉状態に応じて文字を切り替え
+          if (navSns.classList.contains("open")) {
+            toggleButton.textContent = "✕"; // 閉じるアイコン
+            toggleButton.setAttribute("aria-label", "メニューを閉じる");
+          } else {
+            toggleButton.textContent = "☰"; // 開くアイコン
+            toggleButton.setAttribute("aria-label", "メニューを開く");
+          }
+        });
+        document.body.style.visibility = "visible";
+      });
+    </script>
+
+    <script src="script.js"></script>
+
+  </body>
+
+</html>

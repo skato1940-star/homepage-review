@@ -1,0 +1,127 @@
+<!-- about.html -->
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>楽団紹介</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <body style="visibility: hidden;"></body>
+    <div id="header-placeholder"></div>
+    <main>
+      <section class="about">
+        <h3>楽団紹介</h3>
+        <p>立川市吹奏楽団は東京都立川市を中心に活動を行なっているアマチュア市民吹奏楽団です。</br>
+          1971年に立川一中、三中の吹奏楽部卒業生を中心に設立され翌年に第1回定期演会を開催しました。</br>
+          以後、「音楽の喜びをあなたに」をモットーに活動を続け、現在に至っております。</br>
+          活動としては7月に「定期演奏会」、11月に「立川市民文化祭吹奏楽演奏会（ファミリーコンサート）」を中心に、立川市の学校や施設などで演奏会を行なっています。
+      </p>
+      </section>
+
+      <section class="about">
+        <h3>パート紹介</h3>
+        <p>※2025年10月現在</p>
+      </section>
+
+      <section class="sections">
+        <article>
+          <h4>フルート&ピッコロ（6名）</h4>
+          <p>現在6名で活躍中のフルートパートです。今年は何十年？ぶりに10代の子の加入もあり、若返りと華やかさが増しております(^з^)-☆</p>
+        </article>
+
+        <article>
+          <h4>ダブルリード（3名）</h4>
+          <p>オーケストラにはない吹奏楽のよさがダブルリードにもありますよ。いろんな音楽に触れてみませんか？一緒にアンサンブルしましょう！</p>
+        </article>
+
+        <article>
+          <h4>クラリネット（14名）</h4>
+          <p>クラリネットを奏でたい、楽しく音楽を作りたい、そんなメンバーで頑張ってます。</p>
+        </article>
+
+        <article>
+          <h4>サックス（6名）</h4>
+          <p>	様々な音楽を表情豊かに一緒に楽しみましょう！（特にテナー、バリサク大歓迎です）</p>
+        </article>
+
+        <article>
+          <h4>ホルン（4名）</h4>
+          <p>パート内は和やかな感じで仲良く活動しています。日曜日の午後、一緒に楽器を吹きたい方、ぜひお待ちしてま～す♪</p>
+        </article>
+
+        <article>
+          <h4>トランペット（7名）</h4>
+          <p>トランペットパートは、年齢層も男女も幅広く活躍し、まさに輝く主役！
+            鮮やかさと力強い音色で、メロディを歌い上げたり、壮大なファンファーレで会場を盛り上げます。
+            情熱と個性を響かせ、チームを引っ張る魅力的なパートです！
+          </p>
+        </article>
+
+        <article>
+          <h4>トロンボーン（5名）</h4>
+          <p>ゆる～い雰囲気でマイペース、だけど合奏中は真面目（当たり前）なトロンボーンパートです！
+            他のパートの方から「トロンボーンパートは優しさで出来ている」と言われるほど（自称じゃないです、本当に言われました）、みんな聖人級に良い人です！
+            ルーキーからベテランまで幅広く在籍しています！テナーはもちろん、特にバストロ持ってるけど吹く場所に困っているそこの貴方、お待ちしてます！
+          </p>        
+        </article>
+
+        <article>
+          <h4>ユーフォニアム（4名）</h4>
+          <p>若者が入ってきたけど、相変わらず平均年齢は高いままです。</p>
+        </article>
+
+        <article>
+          <h4>チューバ（2名）</h4>
+          <p>	大きなボディから響く低音に惚れ惚れしながら楽しく支えあっているパートです。低音チーム大募集中、ぜひ一度見学体験にいらしてください♪</p>
+        </article>
+
+        <!--<article>
+          <h4>コントラバス（0名）</h4>
+          <p></p>
+        </article>-->
+
+        <article>
+          <h4>パーカッション（6名）</h4>
+          <p>	常に前向きな打パートです。我がパートにネガティブと言う言葉はありません。ポジティブに楽しく演奏しています。</p>
+        </article>
+      </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    
+    <script>
+      Promise.all([
+        fetch("header.html").then(res => res.text()),
+        fetch("footer.html").then(res => res.text())
+      ]).then(([header, footer]) => {
+        document.getElementById("header-placeholder").innerHTML = header;
+        document.getElementById("footer-placeholder").innerHTML = footer;
+        // ヘッダーが挿入された後にイベントを登録
+        const toggleButton = document.querySelector(".menu-toggle");
+        const navSns = document.querySelector(".nav-sns");
+
+        toggleButton.addEventListener("click", () => {
+          navSns.classList.toggle("open");
+
+          // 開閉状態に応じて文字を切り替え
+          if (navSns.classList.contains("open")) {
+            toggleButton.textContent = "✕"; // 閉じるアイコン
+            toggleButton.setAttribute("aria-label", "メニューを閉じる");
+          } else {
+            toggleButton.textContent = "☰"; // 開くアイコン
+            toggleButton.setAttribute("aria-label", "メニューを開く");
+          }
+        });
+        document.body.style.visibility = "visible";
+      });
+    </script>
+
+    <script src="script.js"></script>
+
+  </body>
+
+</html>

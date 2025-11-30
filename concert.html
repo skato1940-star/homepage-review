@@ -1,0 +1,63 @@
+<!-- concert.html -->
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>演奏会案内</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <body style="visibility: hidden;"></body>
+    <div id="header-placeholder"></div>
+    <main>
+      <section class="about">
+        <h3>演奏会案内</h3>
+        <p>2025年11月16日(日)　第68回立川市民文化祭吹奏楽演奏会（ファミリーコンサート）</br>
+        多数のご来場を頂きありがとうございました！</p>
+        <img src="images/flyer.jpeg" alt="演奏会の様子" class="concert-image">
+      </section>
+
+      <section class="about">
+        <h3>次回演奏会のお知らせ</h3>
+        <p>2026年7月20日(月祝)　第54回定期演奏会</p>
+      </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+    
+    <script>
+      Promise.all([
+        fetch("header.html").then(res => res.text()),
+        fetch("footer.html").then(res => res.text())
+      ]).then(([header, footer]) => {
+        document.getElementById("header-placeholder").innerHTML = header;
+        document.getElementById("footer-placeholder").innerHTML = footer;
+        // ヘッダーが挿入された後にイベントを登録
+        const toggleButton = document.querySelector(".menu-toggle");
+        const navSns = document.querySelector(".nav-sns");
+
+        toggleButton.addEventListener("click", () => {
+          navSns.classList.toggle("open");
+
+          // 開閉状態に応じて文字を切り替え
+          if (navSns.classList.contains("open")) {
+            toggleButton.textContent = "✕"; // 閉じるアイコン
+            toggleButton.setAttribute("aria-label", "メニューを閉じる");
+          } else {
+            toggleButton.textContent = "☰"; // 開くアイコン
+            toggleButton.setAttribute("aria-label", "メニューを開く");
+          }
+        });
+        document.body.style.visibility = "visible";
+      });
+    </script>
+
+    <script src="script.js"></script>
+
+  </body>
+
+</html>

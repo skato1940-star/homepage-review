@@ -1,0 +1,78 @@
+<!-- contact.html -->
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>お問い合わせ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <body style="visibility: hidden;">
+    <div id="header-placeholder"></div>
+    <main>
+      <section class="about">
+        <h3>お問い合わせ</h3>
+        <p>見学のお問い合わせ、その他ご意見・ご質問等ありましたらこちらからご連絡ください。</p>
+      </section>
+      <form action="#" method="post">
+        <label for="type">お問い合わせ種別：</label>
+        <select id="type" name="type" required>
+          <option value="">---選択してください---</option>
+          <option value="見学希望">見学希望</option>
+          <option value="譜面関係">譜面関係</option>
+          <option value="チラシ">チラシ</option>
+          <option value="楽器関係">楽器関係</option>
+          <option value="演奏会申込">演奏会申込</option>
+          <option value="その他">その他</option>
+        </select>
+
+        <label for="name">お名前：</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">メールアドレス：</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">本文：</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+
+        <input type="submit" value="送信">
+      </form>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+      Promise.all([
+        fetch("header.html").then(res => res.text()),
+        fetch("footer.html").then(res => res.text())
+      ]).then(([header, footer]) => {
+        document.getElementById("header-placeholder").innerHTML = header;
+        document.getElementById("footer-placeholder").innerHTML = footer;
+        // ヘッダーが挿入された後にイベントを登録
+        const toggleButton = document.querySelector(".menu-toggle");
+        const navSns = document.querySelector(".nav-sns");
+
+        toggleButton.addEventListener("click", () => {
+          navSns.classList.toggle("open");
+
+          // 開閉状態に応じて文字を切り替え
+          if (navSns.classList.contains("open")) {
+            toggleButton.textContent = "✕"; // 閉じるアイコン
+            toggleButton.setAttribute("aria-label", "メニューを閉じる");
+          } else {
+            toggleButton.textContent = "☰"; // 開くアイコン
+            toggleButton.setAttribute("aria-label", "メニューを開く");
+          }
+        });
+        document.body.style.visibility = "visible";
+      });
+    </script>
+      
+    <script src="script.js"></script>
+
+  </body>
+
+</html>

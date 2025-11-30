@@ -1,0 +1,176 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>立川市吹奏楽団</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <body style="visibility: hidden;">
+    <div id="header-placeholder"></div>
+    <main>
+      <section class="hero-carousel">
+        <button class="arrow left">&#9664;</button>
+        <div class="carousel-track">
+          <div class="slide">
+            <a href="concert.html">
+              <img src="images/concert.jpg" alt="演奏会情報">
+              <div class="caption"></div>
+            </a>
+          </div>
+          <div class="slide">
+            <a href="about.html">
+              <img src="images/about.jpg" alt="団について">
+              <div class="caption"></div>
+            </a>
+          </div>
+          <div class="slide">
+            <a href="recruit.html">
+              <img src="images/recruit.jpg" alt="団員募集">
+              <div class="caption"></div>
+            </a>
+          </div>
+          <div class="slide">
+            <a href="concert.html">
+              <img src="images/concert.jpg" alt="演奏会情報">
+              <div class="caption"></div>
+            </a>
+          </div>
+          <div class="slide">
+            <a href="about.html">
+              <img src="images/about.jpg" alt="団について">
+              <div class="caption"></div>
+            </a>
+          </div>
+        </div>
+        <button class="arrow right">&#9654;</button>
+        <div class="carousel-dots"></div>
+      </section>
+
+      <section class="about">
+        <h3></h3>
+        <p>立川市吹奏楽団は東京都立川市を中心に活動を行なっているアマチュア市民吹奏楽団です。</br>
+          1971年に立川一中、三中の吹奏楽部卒業生を中心に設立され翌年に第1回定期演会を開催しました。</br>
+          以後、「音楽の喜びをあなたに」をモットーに活動を続け、現在に至っております。
+        </p>
+      </section>
+
+      <section class="news">
+        <h3>更新情報</h3>
+        <ul></ul> <!-- JavaScriptがここに挿入 -->
+      </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+      Promise.all([
+        fetch("header.html").then(res => res.text()),
+        fetch("footer.html").then(res => res.text())
+      ]).then(([header, footer]) => {
+        document.getElementById("header-placeholder").innerHTML = header;
+        document.getElementById("footer-placeholder").innerHTML = footer;
+
+        // ヘッダーが挿入された後にイベントを登録
+        const toggleButton = document.querySelector(".menu-toggle");
+        const navSns = document.querySelector(".nav-sns");
+
+        toggleButton.addEventListener("click", () => {
+          navSns.classList.toggle("open");
+
+          // 開閉状態に応じて文字を切り替え
+          if (navSns.classList.contains("open")) {
+            toggleButton.textContent = "✕"; // 閉じるアイコン
+            toggleButton.setAttribute("aria-label", "メニューを閉じる");
+          } else {
+            toggleButton.textContent = "☰"; // 開くアイコン
+            toggleButton.setAttribute("aria-label", "メニューを開く");
+          }
+        });
+        
+        document.body.style.visibility = "visible";
+      });
+    </script>
+
+    <script>
+      const track = document.querySelector(".carousel-track");
+      const slides = document.querySelectorAll(".carousel-track .slide");
+      const leftArrow = document.querySelector(".arrow.left");
+      const rightArrow = document.querySelector(".arrow.right");
+      const dotsContainer = document.querySelector(".carousel-dots");
+
+      let currentIndex = 1; // 最初の本物のスライド
+      let isTransitioning = false;
+      const totalSlides = slides.length - 2; // クローン除く
+
+      // ドット生成
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement("div");
+        dot.classList.add("dot");
+        if (i === 0) dot.classList.add("active");
+        dot.addEventListener("click", () => goToSlide(i + 1));
+        dotsContainer.appendChild(dot);
+      }
+
+      function updateDots(index) {
+        const dots = document.querySelectorAll(".carousel-dots .dot");
+        dots.forEach(dot => dot.classList.remove("active"));
+        dots[index - 1].classList.add("active");
+      }
+
+      function getSlideWidth() {
+        return slides[0].clientWidth;
+      }
+
+      function goToSlide(index, animate = true) {
+        if (animate) {
+          track.style.transition = "transform 0.5s ease-in-out";
+        } else {
+          track.style.transition = "none";
+        }
+        track.style.transform = `translateX(-${getSlideWidth() * index}px)`;
+        updateDots(index);
+        currentIndex = index;
+      }
+
+      function nextSlide() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        currentIndex++;
+        goToSlide(currentIndex);
+      }
+
+      function prevSlide() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        currentIndex--;
+        goToSlide(currentIndex);
+      }
+
+      track.addEventListener("transitionend", () => {
+        isTransitioning = false;
+        if (currentIndex === slides.length - 1) {
+          currentIndex = 1;
+          goToSlide(currentIndex, false);
+        } else if (currentIndex === 0) {
+          currentIndex = slides.length - 2;
+          goToSlide(currentIndex, false);
+        }
+      });
+
+      goToSlide(currentIndex, false);
+      rightArrow.addEventListener("click", nextSlide);
+      leftArrow.addEventListener("click", prevSlide);
+      setInterval(nextSlide, 7000);
+
+    </script>
+    
+    <script src="script.js"></script>
+    
+  </body>
+
+</html>
