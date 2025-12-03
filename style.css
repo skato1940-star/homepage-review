@@ -537,7 +537,7 @@ details {
 .records-page th:nth-child(2),
 .records-page td:nth-child(2) { width: 120px; } /* 演奏会名 */
 .records-page th:nth-child(3),
-.records-page td:nth-child(3) { width: 120px; } /* 会場 */
+.records-page td:nth-child(3) { width: 150px; } /* 会場 */
 .records-page th:nth-child(4),
 .records-page td:nth-child(4) { width: 80px; } /* 指揮 */
 .records-page th:nth-child(5),
