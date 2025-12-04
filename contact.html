@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>お問い合わせ</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow">
     <link rel="stylesheet" href="style.css">
   </head>
 
@@ -17,7 +18,8 @@
         <h3>お問い合わせ</h3>
         <p>見学のお問い合わせ、その他ご意見・ご質問等ありましたらこちらからご連絡ください。</p>
       </section>
-      <form action="#" method="post">
+
+      <form action="send.php" method="post">
         <label for="type">お問い合わせ種別：</label>
         <select id="type" name="type" required>
           <option value="">---選択してください---</option>
@@ -69,6 +71,17 @@
         });
         document.body.style.visibility = "visible";
       });
+    </script>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const status = params.get("status");
+
+      if (status === "success") {
+        alert("送信が完了しました。\nメールをお送りしましたのでご確認ください。");
+      } else if (status === "error") {
+        alert("送信に失敗しました。\nお手数ですがもう一度お試しください。");
+      }
     </script>
       
     <script src="script.js"></script>
